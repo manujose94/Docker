@@ -1,0 +1,85 @@
+
+
+docker build -t db-misitio .
+
+sudo docker run -d --name mysql-running db-misitio
+
+#Without --env="MYSQL_ROOT_PASSWORD=123" is the same.
+
+	mysql -uroot 123 -h 172.17.0.2 -P 3306
+
+
+
+Delete image from container (It's showed with 'docker ps -a'):
+docker container rm --force mysql-running
+
+Stop iamge docker:
+sudo docker stop mysql-running
+
+
+
+Doing it step by step from the ground up:
+
+
+manu@manu-GS60-6QE:~/Documents/worksapce/Docker_test/misitio_db$ docker build -t db-misitio .
+[sudo] password for manu: 
+Sending build context to Docker daemon  208.7MB
+Step 1/3 : FROM mysql:5.7.29
+5.7.29: Pulling from library/mysql
+68ced04f60ab: Pull complete 
+f9748e016a5c: Pull complete 
+da54b038fed1: Pull complete 
+6895ec5eb2c0: Pull complete 
+111ba0647b87: Pull complete 
+c1dce60f2f1a: Pull complete 
+702ec598d0af: Pull complete 
+63cca87a5d4d: Pull complete 
+ec05b7b1c5c7: Pull complete 
+834b1d9f49b0: Pull complete 
+8ded6a30c87c: Pull complete 
+Digest: sha256:f4a5f5be3d94b4f4d3aef00fbc276ce7c08e62f2e1f28867d930deb73a314c58
+Status: Downloaded newer image for mysql:5.7.29
+ ---> 84164b03fa2e
+Step 2/3 : ENV MYSQL_ROOT_PASSWORD=123     MYSQL_DATABASE=robotnikdb     MYSQL_USER=users_service      MYSQL_PASSWORD=123     MYSQL_ALLOW_EMPTY_PASSWORD=yes
+ ---> Running in 66cd507b51d6
+Removing intermediate container 66cd507b51d6
+ ---> 27e85cdbd698
+Step 3/3 : ADD setup.sql /docker-entrypoint-initdb.d
+ ---> 5bae35d55fe0
+Successfully built 5bae35d55fe0
+Successfully tagged db-misitio:latest
+manu@manu-GS60-6QE:~/Documents/worksapce/Docker_test/misitio_db$ sudo ./launch.sh 
+a84a6410590a4d037475151aae79b0d6dbcc1c9e4d6f0e96443d41c99b9c75bb
+manu@manu-GS60-6QE:~/Documents/worksapce/Docker_test/misitio_db$ ifconfig | grep "inet addr"
+manu@manu-GS60-6QE:~/Documents/worksapce/Docker_test/misitio_db$ ifconfig | grep "inet"
+        inet 172.18.0.1  netmask 255.255.0.0  broadcast 172.18.255.255
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        inet6 fe80::42:bdff:fe31:9bb6  prefixlen 64  scopeid 0x20<link>
+        inet 192.168.1.91  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fe80::9b11:b1b:e32f:8c6b  prefixlen 64  scopeid 0x20<link>
+        inet 127.0.0.1  netmask 255.0.0.0
+manu@manu-GS60-6QE:~/Documents/worksapce/Docker_test/misitio_db$ mysql -u root -p -h 192.168.1.91 -P 6603 -D robotnikdb
+Enter password: 
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.29 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+mysql> 
+
+Notes:
+
+Showing of container configuration:
+docker inspect mysql-running
+
+Exec mode /bib/bash like a therminal on Linux:
+
+docker exec -it mysql-running  bash
+	root@6df538b5328b:/# mysql -u root -p
+	Enter password: 
+
+

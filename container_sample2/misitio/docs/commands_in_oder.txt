@@ -1,0 +1,7 @@
+Delete all images of Docker
+	sudo docker rmi -f $(sudo docker images -a -q)
+
+
+	echo "alias docker='sudo docker'" >> ~/.bash_aliases
+	docker build -t ros-misitio .
+
