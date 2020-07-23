@@ -119,17 +119,17 @@ Pasos que se siguen normalmente:
 
  #### Arrancar docker ya creado y hecho docker run
 
-![](/home/manuel/Documentos/containers_sample1/misitio_ros_ur/Seleccio1.png)
+![](https://github.com/manujose94/Docker/blob/master/misitio_ros_ur/Seleccio1.png?raw=true)
 
 #### Lanzar Gazebo en el docker
 
-![](/home/manuel/Documentos/containers_sample1/misitio_ros_ur/Seleccio2.png)
+![](https://github.com/manujose94/Docker/blob/master/misitio_ros_ur/Seleccio2.png?raw=true)
 
 #### Lanzar otro terminal para estar dentro del docker (Situación ideal)
 
 En esta imagen puedes ver el gazebo y en el otro terminal (fondo blanco) como accedo dentro del docker y veo mis paquete de ros creado o importados
 
-![](/home/manuel/Documentos/containers_sample1/misitio_ros_ur/Seleccio3.png)
+![](https://github.com/manujose94/Docker/blob/master/misitio_ros_ur/Seleccio3.png?raw=true)
 
 ### Utilizar docker personalizado
 
