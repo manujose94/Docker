@@ -6,6 +6,7 @@ Some example projects where the use of dockers is useful to improve scalability 
 
 - container_sample1
 - container_sample2
+- **misitio_ros_ur** 
 - compose_sample
 
 ## The container sample
@@ -22,7 +23,10 @@ Here the same concept that above, but using docker-compose tool to improve our p
 
 For more information, see inside of **compose_sample** folder where there are main concepts about docker-compose and how to use it.
 
+## Another docker example with ROS
 
+Inside of the folder **misitio_ros_ur** there is an example that how to create and to launch a docker along with **ROS** and **Gazebo** simulator.
+Due to have an insufficient time, all documents, whose content is about how to use this example, are written in Spanish language.
 
  ## Get Started
 
