@@ -191,7 +191,7 @@ It's advisable to use [Docker for VSCODE](https://github.com/microsoft/vscode-do
 
 Here an image with our example project using the named extension
 
-<img src="/home/manuel/Documentos/containers_sample1/misitio_ros/img/dockervscodeextension.png" style="zoom:80%;" />
+<img src="./img/dockervscodeextension.png" style="zoom:80%;" />
 
 #### Start Container
 
