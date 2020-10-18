@@ -1,0 +1,35 @@
+version: '3.7'
+
+volumes:
+  ros2-data:
+
+networks:
+  ros2-net:
+    driver: bridge
+
+services:
+  ros2:
+    build: 
+      dockerfile: ./Dockerfile.full
+      context: .
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    networks: 
+      - ros2-net
+    volumes: 
+      - ros2-data:/opt/ros2_ws/
+      - ./src:/opt/ros2_ws/src
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment: 
+      - ROS_DISTRO=dashing
+      - DISPLAY=:0
+      - NODE_NAME=A
+
+    command: sh -c "tail -F /dev/null"
+
+    logging:
+         driver: "json-file"
+         options:
+             max-file: "5"
+             max-size: "100m"

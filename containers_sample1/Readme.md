@@ -77,7 +77,8 @@ cat: can't open '/data/myfile.txt': No such file or directory
 
 It's a good idea to be aware of what volumes your parent images declare.
 
-Then, if you want to achieve to do the following points: #Points to achieve
+Then, if you want to achieve to do the following points: 
+
 
 - to install `node_modules` automatically instead of manually
 - to install `node_modules` inside the Docker container instead of the host
@@ -144,7 +145,7 @@ Launch file (*example nodejs image*)
 
 Nodejs image uses a persistent volume to get created node project form local directory, if it'd be want to **work with local project and changes automatically take effect inside of the docker**, it's necessary add the [option -t](https://docs.docker.com/engine/reference/commandline/run/) in the example above
 
-Use of Prompt
+**Prompt:**
 
 It's possible to use Bash prompt of the current launched docker whit the following command:
 
@@ -154,6 +155,8 @@ sudo docker container exec -it $name_image bash
 
 ## Note
 
-Here information, step by step how to work with this sample of containers:
+- `wait-for-it.sh` is a pure bash script that will wait on the availability of a host and TCP port. [Here Link](https://github.com/vishnubob/wait-for-it)
 
-[Steps](./Steps.md)
+  
+
+- Here information, step by step how to work with this sample of containers: [Steps](./Steps.md)
