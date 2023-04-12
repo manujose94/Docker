@@ -8,9 +8,6 @@ async function setInsertTest(test_id,result,model_id,model_name) {
     if(!test_id || !model_id || !model_name) return false;
     if(result==false || result==true)result=result==false?0:1;
 
-     /**
-     * ? Obtener fecha de inicio en el formato datetime
-     */
     let init_date=dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"); //By default, DATETIME values range 
 
     let insert="INSERT INTO `robotnikdb`.`tests_ready` "+

@@ -6,10 +6,10 @@ runDocker(){
 	docker run  -t \
 	--publish 8000:8080 \
 	-e MYSQL_USER='root' \
-	-e MYSQL_PASSWORD='123' \
+	-e MYSQL_PASSWORD='student' \
 	-e MYSQL_DATABASE='robotnikdb' \
 	-e MYSQL_HOST='172.17.0.2' \
-	-v=${PWD}/nodejs-microservice/serverROS:/usr/src/serverROS/ \
+	-v=${PWD}/app/serverROS:/usr/src/serverROS/ \
 	--name=$NAME_IMAGE $NAME_CONTAINER
 }
 

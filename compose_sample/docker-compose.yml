@@ -21,7 +21,7 @@ services:
       - '3306'
     volumes:
       - .:/home/node/app
-      - ./misitio_nodejs/nodejs-microservice/serverROS:/usr/src/serverROS/
+      - ./misitio_nodejs/app/serverROS:/usr/src/serverROS/
     networks:
       - app-network
     command: ./wait-for.sh db:3306 -- /usr/src/serverROS/node_modules/.bin/nodemon server.js 

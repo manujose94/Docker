@@ -1,18 +1,33 @@
-## Docker y Gazebo ur3
+# Docker with Gazebo
 
-#### Antes de empezar
+An example of how to use Docker to launch Gazebo together with the UR3 Simulation Robot.
 
-Instalar docker: https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
+### Install Docker
 
-#### Docker a utilizar
+For installation take a look at the official site: [Install Docker Engine](https://docs.docker.com/engine/install/)
 
-Utilizar el docker que deseamos: https://github.com/jacknlliu/ros-docker-images/blob/master/README.md
+### Why Use Docker
 
-Docker al final es como una maquina virtual, pero que consumo muy pocos recursos al no utilizar interfaz al menos que le especifiques que lanzar.
+Docker is a software platform that allows developers to create, deploy, and run applications in a containerized environment. Containers are lightweight, standalone packages of software and dependencies that can be easily moved between different computing environments.
 
-Ademas le puedes generarlo con todas las instalaciones previas. Con ello puedes hacer funcionar ese docker sin depender ni del equipo o sistema operativo que tengas.
+ROS (Robot Operating System) is a popular open-source framework for building robotics applications. Docker can be used with ROS to create containerized environments that encapsulate ROS and its dependencies, making it easier to manage and deploy ROS applications.
 
-Para lanzar, si no tienes ningún proyecto en ROS creado mejor utilizar esto:
+The benefits of using Docker with ROS include:
+
+- Portability: Docker containers can be easily moved between different computing environments, allowing ROS applications to run consistently across different hardware and operating systems.
+
+- Isolation: Docker containers provide a high level of isolation, allowing ROS applications to run in a contained environment without interfering with other applications on the host system.
+
+- Reproducibility: Docker containers can be easily replicated and shared, making it easier to reproduce and share ROS applications with others.
+
+- Scalability: Docker containers can be easily scaled up or down to meet changing demand, making it easier to manage ROS applications in large-scale deployments
+
+
+#### Choose and launch the docker image
+
+Use the Docker image desired: https://github.com/jacknlliu/ros-docker-images/blob/master/README.md
+
+For the first launch, if there isn't a Ros project yet, it is better to use the following launch command
 
 ```shell
 docker run --privileged  \
@@ -24,19 +39,34 @@ docker run --privileged  \
  jacknlliu/ros:kinetic-ide-init terminator
 ```
 
-Este comando lo que hace es, a partir del **docker jacknlliu/ros:kinetic-ide-init** te crea una imagen con el nombre **ros_kinetic**. Todo lo demás son parámetros para hacer funcionar el gazebo dentro de ese docker.
+docker run: This command is used to create and start a new Docker container.
 
-Después de lanzar-lo tu puedes ver que el docker esta funcionando con: `docker ps -a`
+- --privileged: This option gives the container full access to the host system's devices.
+- --security-opt label=disable: This option disables SELinux labels, which can cause issues with some applications.
 
-Siguiendo como ejemplo: http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/move_group_python_interface/move_group_python_interface_tutorial.html
+- --security-opt seccomp=unconfined: This option disables seccomp filtering, which can cause issues with some applications.
+
+- --env="DISPLAY": This option sets the DISPLAY environment variable inside the container, which is needed for applications that use graphical user interfaces.
+
+- --env QT_X11_NO_MITSHM=1: This option sets the QT_X11_NO_MITSHM environment variable inside the container, which is needed for some Qt-based applications.
+- --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw": This option mounts the host system's X11 socket into the container, allowing graphical applications to be displayed on the host system's X server.
+
+- --name="ros_kinetic": This option sets the name of the new container to ros_kinetic.
+
+- jacknlliu/ros:kinetic-ide-init: This is the name and tag of the Docker image to use for the new container.
+
+- terminator: This is the command to run inside the container. In this case, it starts the Terminator terminal emulator.
+
+
+Overall, this command creates a new Docker container based on the jacknlliu/ros:kinetic-ide-init image, with full access to the host system's devices and X server, and runs the terminator command inside the container.
+
+Once it's launched, we can use some of these examples: [move_group_python_interface_tutorial](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
 
 
 
+### List of commands inside the docker
 
-
-### Lista de comandos dentro del terminal del docker
-
-Una vez lanzado, instalar todo lo que necesitamos para manejar el ur3 con fichero python3 y comunicación vía ros. Esta es la lista de comandos que he hecho para crear un proyecto e importar todas las dependencias necesarias:
+Once launched, the next step is to install everything needed to manage UR3 using Python with the ROS communication protocol. As an example, here is a list of commands that can be used to create a project and import all the necessary dependencies:
 
 ```shell
    17  catkin_make
@@ -60,13 +90,12 @@ Una vez lanzado, instalar todo lo que necesitamos para manejar el ur3 con ficher
    35  catkin_make
 ```
 
-Con esto tu paquete es  ur-test donde pondras tu código en ur-test/src. FALTA crear el fichero de lanzamiento como este:  https://github.com/ros-planning/moveit_tutorials/tree/kinetic-devel/doc/move_group_python_interface/launch
+As a result, a package has been created named "ur-test". This package is where all the code will later be added in the *ur-test/src* folder. The next step is to create launch file: [move_group_python_interface/launch](https://github.com/ros-planning/moveit_tutorials/tree/kinetic-devel/doc/move_group_python_interface/launch). This file need to be created to work.
 
-Pero se debe de adaptar para el nombre de tu proyecto ur-test.
 
-Pasos que se siguen normalmente:
+Steps now normally followed:
 
-1. Esto solo se haría una vez:
+1. Launch the image:
 
    ```shell
    docker run --privileged  \
@@ -80,13 +109,13 @@ Pasos que se siguen normalmente:
 
    
 
-2. Luego para volver a iniciar, sería en tu terminal Ubuntu:
+2. To init image again from terminal:
 
    ```
    docker ps -a
    ```
 
-   Saldrá algo como esto:
+   This command will show something like this:
 
    ```
    CONTAINER ID        IMAGE                                  CREATED             STATUS 
@@ -95,7 +124,7 @@ Pasos que se siguen normalmente:
    ros_kinetic
    ```
 
-   Después escribir en el terminal estos dos comandos:
+   Then write this two commands in terminal:
 
    ```
    xhost +
@@ -107,33 +136,32 @@ Pasos que se siguen normalmente:
 
    
 
-3. Con eso se te abre un terminal. La idea seria, lanzar el emulador con `roslaunch ur_gazebo ur3.launch` en el terminal que sale cuando lo arrancar.
+3. Once these commands are launched, the idea is to launch the emulator by using this command `roslaunch ur_gazebo ur3.launch`  in the terminal of the image, in this case the image with ID `e454ccdaec5f`.
 
-4. En otro terminal de tu equipo:  docker exec -it ros_kinetic bash 
+4. Open another terminal in the machine and launch:  `docker exec -it ros_kinetic bash` 
 
-5. Estas dentro del docker donde puedes editar tu codigo o hacer las pruebas que necesites
+5. With step 4, we are inside the Docker image, where it is possible to edit code or do all the necessary tests.It's also possible to edit the Python file locally and then copy it to the currently running Docker image.
 
-6. Puedes editar un python en tu ubuntu normal y luego copiarlo al docker que esta lanzado
+### Screenshots
 
-### Capturas
-
- #### Arrancar docker ya creado y hecho docker run
+#### Launch Docker image and run it
 
 ![](https://github.com/manujose94/Docker/blob/master/misitio_ros_ur/Seleccio1.png?raw=true)
 
-#### Lanzar Gazebo en el docker
+#### Launch Gazebo
 
 ![](https://github.com/manujose94/Docker/blob/master/misitio_ros_ur/Seleccio2.png?raw=true)
 
-#### Lanzar otro terminal para estar dentro del docker (Situación ideal)
+#### Launching another
 
-En esta imagen puedes ver el gazebo y en el otro terminal (fondo blanco) como accedo dentro del docker y veo mis paquete de ros creado o importados
+In this image it's possible to see Gazebo and how access to inside of docker in another terminal (White Background), from which we may list newly developed or imported ROS packages.
+
 
 ![](https://github.com/manujose94/Docker/blob/master/misitio_ros_ur/Seleccio3.png?raw=true)
 
-### Utilizar docker personalizado
+### Use custom Docker image
 
-Este docker es creado a partir de la base del docker anterior, creando el workspace y añadiendo todas las librerías y paquetes necesarios.
+This Docker was created from the previous Docker image, creating the workspace and adding all the necessary libraries and packages. This means that the workspace, along with all necessary libraries and packages, are added when the workspace is created.
 
 ```shell
 docker build -t ros_ur_gazebo .
@@ -141,9 +169,9 @@ docker build -t ros_ur_gazebo .
 sudo launch.sh
 ```
 
-### Eliminarlo todo
+### Delete
 
-Si quieres eliminar el docker e imagen y empezar de nuevo, en el terminal:
+If it's wished to remove the docker and the image and start again, in the terminal:
 
 ```shell
 docker rmi -f $(docker images -a -q)
@@ -152,11 +180,10 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 ```
 
-### Enlaces interesantes
+### Interesting links
 
-http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html
-
-https://github.com/ros-industrial/universal_robot/blob/indigo-devel/README.md
+- [moveit_tutorials](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html)
+- [/ros-industrial/universal_robot/blob/indigo-devel](https://github.com/ros-industrial/universal_robot/blob/indigo-devel/README.md)
 
 #### ROS AL INICIO
 
@@ -164,4 +191,4 @@ https://github.com/ros-industrial/universal_robot/blob/indigo-devel/README.md
 
 2. http://wiki.ros.org/ROS/Tutorials/CreatingPackage
 
-http://www2.ece.ohio-state.edu/~zhang/RoboticsClass/docs/ECE5463_ROSTutorialLecture1.pdf
+3. http://www2.ece.ohio-state.edu/~zhang/RoboticsClass/docs/ECE5463_ROSTutorialLecture1.pdf

@@ -1,1 +1,0 @@
-{"h1":{"votos":1,"ganador":"pp"},"h2":{"votos":1,"ganador":"pp"}}

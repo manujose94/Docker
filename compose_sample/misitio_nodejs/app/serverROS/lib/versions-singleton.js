@@ -22,11 +22,6 @@ var VersionSingleton = (function () {
       
     }
 
-    /**
-     *  
-     *  TODO: metodo singlere
-     *  ASDA
-     */
 
     VersionSingleton.prototype.myCommands = async () => {
         try {

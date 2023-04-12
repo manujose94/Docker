@@ -1,9 +1,9 @@
 <h1 align="center">Docker examples</h1>
-<h4 align="center"> Some example projects where the use of Dockers is useful to improve scalability, compatibility and some cases get rid us of some headaches. On this repository contains some small projects with Docker that can help us to give an idea of its usefulness</h4>
+<h4 align="center"> There are some example projects where Docker can improve scalability, compatibility, and in some cases, alleviate headaches. This repository contains some small projects that use Docker to give you an idea of its usefulness</h4>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=manujose94" alt="manujose94" /> </p>
 
-- 🌱 I’m currently learning **Cloud computing and ROS**
+- 🌱 Learning about **Cloud computing and ROS**
 
 - 🤔 I’m looking for help with [Docker](https://github.com/manujose94/Docker)
 
@@ -15,28 +15,22 @@
 
 - 📫 How to reach me **manujose94unsc@gmail.com**
 
-<p align="left"><img src="https://devicons.github.io/devicon/devicon.git/icons/bootstrap/bootstrap-plain.svg" alt="bootstrap" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/css3/css3-original-wordmark.svg" alt="css3" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/docker/docker-original-wordmark.svg" alt="docker" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/javascript/javascript-original.svg" alt="javascript" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/typescript/typescript-original.svg" alt="typescript" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/python/python-original-wordmark.svg" alt="python" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/linux/linux-original.svg" alt="linux" width="20" height="20"/> <img src="https://devicons.github.io/devicon/devicon.git/icons/express/express-original-wordmark.svg" alt="express" width="20" height="20"/></p><p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=manujose94&show_icons=true" alt="manujose94" /> </p>
+<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=manujose94&show_icons=true" alt="manujose94" /> </p>
 
-<p align="center">
-<a href="https://twitter.com/@xmanuhlx" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/twitter.svg" alt="@xmanuhlx" height="20" width="20" /></a>
-<a href="https://instagram.com/manueljose50" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg" alt="manueljose50" height="20" width="20" /></a>
-</p>
 
 ### Folders
 
-- [container_sample1](https://github.com/manujose94/Docker/tree/master/compose_sample)
-- [container_sample2](https://github.com/manujose94/Docker/tree/master/compose_sample2)
+- [container_sample1](https://github.com/manujose94/Docker/tree/master/containers_sample1)
+- [container_sample2](https://github.com/manujose94/Docker/tree/master/containers_sample2)
 - **[misitio_ros](https://github.com/manujose94/Docker/tree/master/misitio_ros)**
 - **[misitio_ros_ur](https://github.com/manujose94/Docker/tree/master/misitio_ros_ur)** 
 - [compose_sample](https://github.com/manujose94/Docker/tree/master/compose_sample)
 
 ## The container sample
 
-This example is a sample that how to do a typical project NodeJS+Express and MYSQL based on dockers.
+This example is a sample of how to make a typical NodeJS+Express and MYSQL project based on Docker. In addition, the "container sample 1" already has a launch.sh script, it may be useful to take a look at the series of commands that are written.
 
-Furthermore, the container sample 1 already has a script launch. sh, it can be helpful  to take a look to series of commands which are written.
-
-For more information, see inside of **container_sample1** folder.
+For more information, see inside the **container_sample1** folder.
 
 ## The composer sample
 
@@ -44,14 +38,15 @@ Here the same concept that above, but using docker-compose tool to improve our p
 
 For more information, see inside of **compose_sample** folder where there are main concepts about docker-compose and how to use it.
 
-## Another docker example with ROS
+## ROS and Gazebo combined with Docker
 
 The first folder named **misitio_ros** contains a small project about ROS Kinect to provide an easier learning about ROS thanks to the integrated ROS inside of Docker and using it on your web browser.
 
 Inside of the folder **misitio_ros_ur** there is an example that how to create and to launch a docker along with **ROS** and **Gazebo** simulator.
-Due to have an insufficient time, all documents, whose content is about how to use this example, are written in Spanish language.
 
- ## Get Started
+Due to insufficient time, all documents whose content about how to use these examples, are limited. Keep in mind that the purpose is to provide a first environment with ROS where ROS doesn't need to be installed locally.
+
+## Get Started
 
 ### Install docker
 
@@ -156,7 +151,7 @@ docker run  -t \
 	-e MYSQL_PASSWORD='student' \
 	-e MYSQL_DATABASE='robotnikdb' \
 	-e MYSQL_HOST='172.17.0.2' \
-	-v=${PWD}/nodejs-microservice/serverROS:/usr/src/serverROS/ \
+	-v=${PWD}/app/serverROS:/usr/src/serverROS/ \
 	--name=$NAME_IMAGE $NAME_CONTAINER
 ```
 

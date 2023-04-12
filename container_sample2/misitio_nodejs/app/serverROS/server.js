@@ -8,8 +8,7 @@ const VersionSingleton = require('./lib/versions-singleton');
 const morgan = require('morgan');
 const  app = express();
 router = express.Router();
-var swaggerUi = require('swagger-ui-express'),
-    swaggerDocument = require('./swagger.json');
+
 
 //Arguments
 var argv = require('minimist')(process.argv.slice(2));
@@ -88,31 +87,6 @@ var server = app.listen( process.env.PORT  || 8080, process.env.HOST || '0.0.0.0
 });
 
 
-
- 
-
-
-
-
-//https://platzi.com/blog/que-es-y-como-funcionan-las-promesas-en-javascript/
-
-/**function onConnectTopic(topicArray) {
-    current_topic=topicArray[0]; //[0] name - [1] messageType
-console.log(topicArray)
-   new_listener = { ros : new ROSLIB.Topic({
-        ros : ros,
-        name : topicArray[0],
-        messageType : topicArray[1]
-      }) , value: "nothing" }
-      new_listener.ros.subscribe(function(m) { 
-       new_listener.value=m;
-
-      //move(1, 0);
-    });
-      return true;
-}**/
-
-
 //Arranque => Init
 //Promesa 
 function getAsyncDataTopics(){ //Realizar al iniciar
@@ -152,7 +126,6 @@ singleton.ros.on('connection', function(value) { //Listener que se activa si ros
 });
 
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', router);
 
 
